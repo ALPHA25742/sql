@@ -16,7 +16,9 @@ mysql work bench
 
 INSERT INTO employee VALUES (1,"mohd","awaiz",22,18000,"hyd")
 
-# interview questions
+# interview questions starts from 5
+
+priority-joins, CTE
 
 SELECT FirstName,LastName FROM employee WHERE Salary>8000
 hows the execution flow
@@ -76,6 +78,14 @@ for applying condition with group by we have to use having clause
 joins
 inner left right cross
 its not necessary that the common column in the tables have the same name, the values matters not the name
+
+subqueries are like loops & the more we use them the more the time complexity
+
+select LearnerID, Learner_FirstName, Learner_LastName, orderCount,
+avg(sum(orderCount)) over() from Learner join
+(select orderStudentID, count(\*) as orderCount from orders group by orderStudentID) as temp
+on Learner.LearnerID=temp.orderStudentID group by LearnerID
+code flow: subquery()>join>group by>select
 
 UPDATE employee SET LastName="rehan" WHERE EID=2
 here if we give other feild to where for filtering than the primary key, it will show an error of safe mode that can be changed by admin but it is the best practice to use primary key in filters for accurate results
